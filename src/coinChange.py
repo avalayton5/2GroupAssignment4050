@@ -6,7 +6,7 @@ sys.setrecursionlimit(max(sys.getrecursionlimit(), 20000))
 
 def validate(denoms, amount):
     if amount < 0:
-        raise ValueError("Amount must be greater than 0.")
+        raise ValueError("Amount must be 0 or greater.")
     ds = sorted(set(denoms))
     if any(d <= 0 for d in ds):
         raise ValueError("Denominations must be positive integers")
@@ -17,7 +17,7 @@ def validate(denoms, amount):
 #--------------------------------
 def greedy(denoms, amount):
     ds = validate(denoms, amount)
-    desc = sorted(denoms, reverse = True)
+    desc = sorted(ds, reverse = True)
     remaining = amount
     coins = []
     for d in desc:
@@ -42,7 +42,7 @@ def naiveRecursion(denoms, amount):
             if d > a:
                 break
             sub = solve(a - d)
-            if sub is IMPOSSIBLE:
+            if sub == IMPOSSIBLE:
                 continue
             count = sub[0] + 1
             if best is None or count < best[0]:

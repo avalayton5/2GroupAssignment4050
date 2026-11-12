@@ -23,6 +23,7 @@ def verifyResult(denoms, amount, result, solverName = ""):
         return
     count, coins = result
     assert sum(coins) == amount, f"{solverName}: {coins} does not sum to {amount}"
+    assert len(coins) == count, f"{solverName}: reported count {count} but returned {len(coins)} coins"
 
 def countOf(result):
     if result == IMPOSSIBLE:
@@ -151,6 +152,10 @@ def runCounterexample():
         print(f"  D={c['denoms']!s:<14} A={c['amount']:<3} "
               f"greedy={gCount} coins {sorted(gCoins, reverse=True)}  "
               f"optimal={oCount} coins {sorted(oCoins, reverse=True)}")
+    print("\nCounterexamples used in the report:")
+    for c in cex:
+        if c["denoms"] in ([1, 3, 4], [1, 5, 6, 9], [1, 5, 10, 12]):
+            print(f"  D={c['denoms']}, A={c['amount']}: greedy {c['greedy']} vs optimal {c['optimal']}")
     return cex
 
 if __name__ == "__main__":
