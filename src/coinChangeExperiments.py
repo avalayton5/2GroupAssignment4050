@@ -22,7 +22,7 @@ def saveCSV(filename, header, rows):
     with open(path, "w", newline = "") as f:
         writer = csv.writer(f)
         writer.writerow(header)
-        writer.writerow(rows)
+        writer.writerows(rows)
     print(f"Saved {path}")
 
 def naiveCounts(amount):
