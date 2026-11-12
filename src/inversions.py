@@ -28,26 +28,28 @@ def merge_and_count(left, right):
 	sorted_sub = []
 	i = j = 0
 	cross = 0
-	while i < len(left) and j < len(right):
-		if left[i] <= right[j]:
+	nL, nR = len(left), len(right)
+	while i < nL and j < nR:
+		if left[i] <= right[j]: #2<=1
 			sorted_sub.append(left[i])
 			i += 1
 		else:
 			sorted_sub.append(right[j])
 			j += 1
-			cross += len(left) - 1
+			cross += nL - i
 	sorted_sub.extend(left[i:])
 	sorted_sub.extend(right[j:])
-	return merged, cross
+	return sorted_sub, cross
 
 
 def sort_and_count(a):
 
-	if len(a) <= 1:
+	n = len(a)
+	if n <= 1:
 	#return (inversion_count, sorted_list)
 		return 0, list(a)
-	mid = len(a) // 2
-
+	mid = n // 2
+	print(f"mid: {mid} for {list(a)}")
 	#recursively divide the array
 	left_count, left_sorted = sort_and_count(a[:mid])
 	right_count, right_sorted = sort_and_count(a[mid:])

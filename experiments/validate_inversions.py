@@ -29,7 +29,7 @@ HAND_TESTS = [
 	("reverse n=6", [6, 5, 4, 3, 2, 1], 15),
 	("nearly sorted: one adjacent swap", [1, 2, 4, 3, 5, 6], 1),
 	("nearly sorted: last in front", [6, 1, 2, 3, 4, 5], 5),
-	("nearly sorted: first in last", [2, 3, 4, 5, 6, 1], 4),
+	("nearly sorted: first in last", [2, 3, 4, 5, 1], 4),
 	("lecture example", [1, 5, 4, 8, 10, 2, 6, 9, 12, 11, 3, 7], 22),
 	("random small", [3, 1, 4, 2], 3),
 	("interleaved halves", [2, 4, 6, 1, 3, 5], 6),
@@ -43,7 +43,7 @@ def check(arr):
 
 def main():
 	rng = random.Random(SEED)
-	report = {"seed": SEED, "hand_tests": [], "random_test": 0, "failures": []}
+	report = {"seed": SEED, "hand_tests": [], "random_tests": 0, "failures": []}
 
 	for name, arr, expected in HAND_TESTS:
 		bf, dc, sorted_ok = check(arr)
